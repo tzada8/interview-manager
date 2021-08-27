@@ -10,9 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_08_27_185903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "generics", force: :cascade do |t|
+    t.string "prompt", limit: 4096, null: false
+    t.string "answer", limit: 4096, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "generics_interviews", id: false, force: :cascade do |t|
+    t.bigint "generic_id", null: false
+    t.bigint "interview_id", null: false
+    t.index ["generic_id", "interview_id"], name: "index_generics_interviews_on_generic_id_and_interview_id", unique: true
+  end
+
+  create_table "interviews", force: :cascade do |t|
+    t.string "position", limit: 100, null: false
+    t.string "company", limit: 100, null: false
+    t.date "date", null: false
+    t.integer "duration", null: false
+    t.string "interviewer", limit: 100, null: false
+    t.string "industry", limit: 100, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "prompt", limit: 4096, null: false
+    t.string "answer", limit: 4096, null: false
+    t.bigint "interview_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["interview_id"], name: "index_questions_on_interview_id"
+  end
+
+  add_foreign_key "generics_interviews", "generics"
+  add_foreign_key "generics_interviews", "interviews"
+  add_foreign_key "questions", "interviews"
 end

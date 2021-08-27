@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prompt:</strong>
+  <%= @generic.prompt %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @generic.answer %>
+</p>
+
+<%= link_to 'Edit', edit_generic_path(@generic) %> |
+<%= link_to 'Back', generics_path %>

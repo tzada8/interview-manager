@@ -1,0 +1,27 @@
+<%= form_with(model: generic) do |form| %>
+  <% if generic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(generic.errors.count, "error") %> prohibited this generic from being saved:</h2>
+
+      <ul>
+        <% generic.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :prompt %>
+    <%= form.text_field :prompt %>
+  </div>
+
+  <div class="field">
+    <%= form.label :answer %>
+    <%= form.text_field :answer %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
