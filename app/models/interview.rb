@@ -1,5 +1,5 @@
 class Interview < ApplicationRecord
-   has_many :questions
+   has_many :questions, dependent: :destroy
    has_and_belongs_to_many :generics
 
    validates_presence_of :position

@@ -17,10 +17,11 @@
       <tr>
         <td><%= question.prompt %></td>
         <td><%= question.answer %></td>
-        <td><%= question.interview_id %></td>
-        <td><%= link_to 'Show', question_path %></td>
-        <td>Edit</td>
-        <td>Destroy</td>
+        <td><%= question.interview.position %></td>
+        <td><%= question.interview.company %></td>
+        <td><%= link_to 'Show Interview', [@interview] %></td>
+        <td><%= link_to 'Edit Question', edit_interview_question_path(@interview, question) %></td>
+        <td><%= link_to 'Destroy Question', [@interview, question], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +29,4 @@
 
 <br>
 
-'New Question'
+<%= link_to 'New Question', new_interview_question_path(@interview) %>

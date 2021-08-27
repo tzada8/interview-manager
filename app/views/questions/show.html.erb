@@ -15,5 +15,5 @@
   <%= @question.interview_id %>
 </p>
 
-'Edit' |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Edit', edit_interview_question_path(@interview, @question) %> |
+<%= link_to 'Back', interview_questions_path(@interview) %>

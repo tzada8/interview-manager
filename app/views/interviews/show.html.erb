@@ -30,5 +30,18 @@
   <%= @interview.industry %>
 </p>
 
+<p>
+  <strong>Questions:</strong>
+  <% @interview.questions.each do |question| %>
+    <ul>
+      <li>
+        <%= question.prompt %>
+        <%= question.answer %>
+      </li>
+    </ul>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_interview_path(@interview) %> |
+<%= link_to 'Add Question', interview_questions_path(@interview) %> |
 <%= link_to 'Back', interviews_path %>
