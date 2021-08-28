@@ -4,16 +4,17 @@
 # Seed data only used for development; for production, application will have no data.
 case Rails.env
 when "development"
-   exponent_canada = Interview.create(position: "Software Developer", company: "Exponent Canada", date: "July 9, 2021", duration: 20, interviewer: "Salman Hasani", industry: "Tech")
-   tribalscale = Interview.create(position: "Agile Software Engineering", company: "TribalScale", date: "July 8, 2021", duration: 30, interviewer: "Roisin Flood", industry: "Tech")
-   insticator = Interview.create(position: "Back End Engineering - Advertisement & Revenue", company: "Insticator", date: "July 7, 2021", duration: 45, interviewer: "Steven Wang, Xiaorong Rao", industry: "Tech")
+   exponent_canada = Interview.create(position: "Software Developer", company: "Exponent Canada", date: "July 9, 2021", duration: 20, interviewer: "Salman Hasani", industry: "Technology")
+   tribalscale = Interview.create(position: "Agile Software Engineering", company: "TribalScale", date: "July 8, 2021", duration: 30, interviewer: "Roisin Flood", industry: "Technology")
+   insticator = Interview.create(position: "Back End Engineering - Advertisement & Revenue", company: "Insticator", date: "July 7, 2021", duration: 45, interviewer: "Steven Wang, Xiaorong Rao", industry: "Technology")
    carta_maple = Interview.create(position: "Data Scientist", company: "Carta Maple Technologies", date: "June 29, 2021", duration: 45, interviewer: "Erin Boehmer", industry: "Research")
-   remitbee = Interview.create(position: "Full Stack Developer Intern", company: "Remitbee", date: "June 1, 2021", duration: 15, interviewer: "Neville Debre", industry: "Tech")
-   university_of_waterloo = Interview.create(position: "MSCI 121 WEEF TA", company: "University of Waterloo", date: "October 5, 2020", duration: 20, interviewer: "Mike Cooper-Stachowsky", industry: "Teaching")
+   remitbee = Interview.create(position: "Full Stack Developer Intern", company: "Remitbee", date: "June 1, 2021", duration: 15, interviewer: "Neville Debre", industry: "Technology")
+   university_of_waterloo = Interview.create(position: "MSCI 121 WEEF TA", company: "University of Waterloo", date: "October 5, 2020", duration: 20, interviewer: "Mike Cooper-Stachowsky", industry: "Education")
    data_sea = Interview.create(position: "Data Engineering", company: "Data SEA Consulting", date: "June 7, 2021", duration: 30, interviewer: "Andrew Dent", industry: "Research")
    ats = Interview.create(position: "Technical Writer", company: "ATS Automation Tooling Systems", date: "February 3, 2020", duration: 30, interviewer: "Jeanette Dillon", industry: "Manufacturing")
    pepsico = Interview.create(position: "Supply Chain Assistant", company: "PepsiCo", date: "January 31, 2020", duration: 40, interviewer: "TBD", industry: "Management")
    pepsico2 = Interview.create(position: "Project Coordinator", company: "PepsiCo", date: "February 6, 2020", duration: 30, interviewer: "Heather Dixon", industry: "Management")
+   other_category = Interview.create(position: "Tester", company: "Hello.io", date: "August 27, 2021", duration: 45, interviewer: "Bobby McBob", industry: "Other")
 
    # General questions 
    g1 = Generic.create(prompt: "Tell me about yourself?", answer: "I am a third year Management Engineering student attending the University of Waterloo with a passion for innovation, programming, and problem-solving.")
