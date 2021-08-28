@@ -22,8 +22,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :interview_id %>
-    <%= form.text_field :interview_id %>
+    <%= form.hidden_field :interview_id, value: @interview.id %>
   </div>
 
   <div class="actions">

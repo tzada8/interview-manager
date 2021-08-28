@@ -10,10 +10,5 @@
   <%= @question.answer %>
 </p>
 
-<p>
-  <strong>Interview:</strong>
-  <%= @question.interview_id %>
-</p>
-
 <%= link_to 'Edit', edit_interview_question_path(@interview, @question) %> |
 <%= link_to 'Back', interview_questions_path(@interview) %>
