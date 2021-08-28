@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions or /questions.json
   def index
+    # WILL PROBABLY REMOVE THIS PAGE ENTIRELY SINCE 'INDEX' PAGE WILL BE APART OF /interviews/:id
     @questions = @interview.questions
   end
 

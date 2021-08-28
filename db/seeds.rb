@@ -26,7 +26,7 @@ when "development"
    exp1 = Question.create(prompt: "Why do you want to join this company?", answer: "Because the company is Exponent Canada", interview: exponent_canada)
    exp2 = Question.create(prompt: "Explain to me a tech project you've worked on.", answer: "The project I will discuss is my Pathfinding Algorithms application that I created using Java along with Java's Swing GUI.", interview: exponent_canada)
    ts1 = Question.create(prompt: "Why do you want to join this company?", answer: "Because the company is TribalScale", interview: tribalscale)
-   ts2 = Question.create(prompt: "Are you familiar working in a pair programming environment?", answer: "I have never directly working in one myself, however, I am familiar with the idea of how pair programming works", interview: tribalscale)
+   ts2 = Question.create(prompt: "Are you familiar working in a pair programming environment?", answer: "I have never directly worked in one myself, however, I am familiar with the idea of how pair programming works", interview: tribalscale)
    ts3 = Question.create(prompt: "Please solve this coding problem.", answer: "To find the max product, you will need to loop through all values of the array and determine what the 2 largest negative as well as 2 largest positive numbers are. The one that gives a higher product is the value returned.", interview: tribalscale)
    rb1 = Question.create(prompt: "Explain the 2 types of React hooks.", answer: "They are useState and useEffect.", interview: remitbee)
 
