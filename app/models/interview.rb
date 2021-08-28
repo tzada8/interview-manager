@@ -2,6 +2,7 @@ class Interview < ApplicationRecord
    # Interview must be categorized in one of the following groups
    INDUSTRIES = ["Technology", "Sales", "Finance", "Arts and Entertainment", "Media", "Food Services", "Law Enforcement", "Health", "Research", "Education", "Manufacturing", "Management", "Other"]
 
+   belongs_to :user
    has_many :questions, dependent: :destroy
    has_and_belongs_to_many :generics
 

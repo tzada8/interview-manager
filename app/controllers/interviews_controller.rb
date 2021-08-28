@@ -64,6 +64,6 @@ class InterviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def interview_params
-      params.require(:interview).permit(:position, :company, :date, :duration, :interviewer, :industry)
+      params.require(:interview).permit(:position, :company, :date, :duration, :interviewer, :industry, :user_id)
     end
 end

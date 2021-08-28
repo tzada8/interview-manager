@@ -39,7 +39,11 @@
   <div class="field">
         <%= form.label :industry %>
         <%= form.select(:industry, Interview::INDUSTRIES.sort, { include_blank: "Select a Industry" }) %>
-    </div>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :user_id, id: interview_user_id, value: current_user.id %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
