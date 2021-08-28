@@ -36,6 +36,13 @@ when "development"
    pepsico.generics = [g4]
    university_of_waterloo.generics = [g1, g4]
    insticator.generics = [g4]
+
+   # My questions to ask interviewer
+   MyQuestion.create(prompt: "Can you describe to me a typical work day at your company?")
+   MyQuestion.create(prompt: "If I were the successful candidate for this position, what could I do to better prepare myself for the first day?")
+   MyQuestion.create(prompt: "Is there anything I can do to further prepare myself for the first day?")
+   MyQuestion.create(prompt: "Who will I be working most closely with?")
+   MyQuestion.create(prompt: "What is the expected salary for this position?")
 when "production"
 
 end

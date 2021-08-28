@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :interviews do
     resources :questions
   end
+  resources :my_questions
 end
