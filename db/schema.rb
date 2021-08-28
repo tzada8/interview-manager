@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_28_172805) do
+ActiveRecord::Schema.define(version: 2021_08_28_175840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_08_28_172805) do
     t.string "answer", limit: 4096, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_generics_on_user_id"
   end
 
   create_table "generics_interviews", id: false, force: :cascade do |t|
@@ -45,6 +47,8 @@ ActiveRecord::Schema.define(version: 2021_08_28_172805) do
     t.string "prompt", limit: 4096, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_my_questions_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -68,8 +72,10 @@ ActiveRecord::Schema.define(version: 2021_08_28_172805) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "generics", "users"
   add_foreign_key "generics_interviews", "generics"
   add_foreign_key "generics_interviews", "interviews"
   add_foreign_key "interviews", "users"
+  add_foreign_key "my_questions", "users"
   add_foreign_key "questions", "interviews"
 end
