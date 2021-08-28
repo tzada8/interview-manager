@@ -1,5 +1,7 @@
 class GenericsController < ApplicationController
   before_action :set_generic, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: %i[ show edit update destroy ]
 
   # GET /generics or /generics.json
   def index
@@ -12,7 +14,7 @@ class GenericsController < ApplicationController
 
   # GET /generics/new
   def new
-    @generic = Generic.new
+    @generic = current_user.generics.build
   end
 
   # GET /generics/1/edit
@@ -21,7 +23,7 @@ class GenericsController < ApplicationController
 
   # POST /generics or /generics.json
   def create
-    @generic = Generic.new(generic_params)
+    @generic = current_user.generics.build(generic_params)
 
     respond_to do |format|
       if @generic.save
@@ -54,6 +56,11 @@ class GenericsController < ApplicationController
       format.html { redirect_to generics_url, notice: "Generic was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def correct_user
+    @generic = current_user.generics.find_by(id: params[:id])
+    redirect_to generics_path, notice: "Not Authorized to Edit This Interview" if @generic.nil?
   end
 
   private

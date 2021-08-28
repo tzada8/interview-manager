@@ -1,5 +1,7 @@
 class InterviewsController < ApplicationController
   before_action :set_interview, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: %i[ show edit update destroy ]
 
   # GET /interviews or /interviews.json
   def index
@@ -12,7 +14,7 @@ class InterviewsController < ApplicationController
 
   # GET /interviews/new
   def new
-    @interview = Interview.new
+    @interview = current_user.interviews.build
   end
 
   # GET /interviews/1/edit
@@ -21,7 +23,7 @@ class InterviewsController < ApplicationController
 
   # POST /interviews or /interviews.json
   def create
-    @interview = Interview.new(interview_params)
+    @interview = current_user.interviews.build(interview_params)
 
     respond_to do |format|
       if @interview.save
@@ -54,6 +56,11 @@ class InterviewsController < ApplicationController
       format.html { redirect_to interviews_url, notice: "Interview was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def correct_user
+    @interview = current_user.interviews.find_by(id: params[:id])
+    redirect_to interviews_path, notice: "Not Authorized to Edit This Interview" if @interview.nil?
   end
 
   private

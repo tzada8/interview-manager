@@ -13,13 +13,15 @@
 
   <tbody>
     <% @generics.each do |generic| %>
-      <tr>
-        <td><%= generic.prompt %></td>
-        <td><%= generic.answer %></td>
-        <td><%= link_to 'Show', generic %></td>
-        <td><%= link_to 'Edit', edit_generic_path(generic) %></td>
-        <td><%= link_to 'Destroy', generic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% if generic.user == current_user %>
+        <tr>
+          <td><%= generic.prompt %></td>
+          <td><%= generic.answer %></td>
+          <td><%= link_to 'Show', generic %></td>
+          <td><%= link_to 'Edit', edit_generic_path(generic) %></td>
+          <td><%= link_to 'Destroy', generic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

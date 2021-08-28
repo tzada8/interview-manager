@@ -1,5 +1,7 @@
 class MyQuestionsController < ApplicationController
   before_action :set_my_question, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: %i[ show edit update destroy ]
 
   # GET /my_questions or /my_questions.json
   def index
@@ -12,7 +14,7 @@ class MyQuestionsController < ApplicationController
 
   # GET /my_questions/new
   def new
-    @my_question = MyQuestion.new
+    @my_question = current_user.my_questions.build
   end
 
   # GET /my_questions/1/edit
@@ -21,7 +23,7 @@ class MyQuestionsController < ApplicationController
 
   # POST /my_questions or /my_questions.json
   def create
-    @my_question = MyQuestion.new(my_question_params)
+    @my_question = current_user.my_questions.build(my_question_params)
 
     respond_to do |format|
       if @my_question.save
@@ -54,6 +56,11 @@ class MyQuestionsController < ApplicationController
       format.html { redirect_to my_questions_url, notice: "My question was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def correct_user
+    @my_question = current_user.my_questions.find_by(id: params[:id])
+    redirect_to my_questions_path, notice: "Not Authorized to Edit This Interview" if @my_question.nil?
   end
 
   private
