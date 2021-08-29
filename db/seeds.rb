@@ -8,22 +8,27 @@ when "development"
    user1 = User.new(email: 'test@test.com') # Has 0 interviews, 0 general questions, 0 own questions
    user1.password = 'testing'
    user1.password_confirmation = 'testing'
+   user1.save
 
    bob = User.new(email: 'bob@bob.com') # Has 1 interview, 1 general questions, 0 own questions
    bob.password = 'bobbob'
    bob.password_confirmation = 'bobbob'
+   bob.save
 
    mary = User.new(email: 'mary@mary.com') # Has 2 interviews, 1 general question, 1 own questions
    mary.password = 'marymary'
    mary.password_confirmation = 'marymary'
+   mary.save
 
    fred = User.new(email: 'fred@fred.com') # Has many interviews, many general questions, 2 own questions
    fred.password = 'fredfred'
    fred.password_confirmation = 'fredfred'
+   fred.save
 
    sue = User.new(email: 'sue@sue.com') # Has many interviews, many general questions, many own questions
    sue.password = 'suesue'
    sue.password_confirmation = 'suesue'
+   sue.save
 
    # Interviews each user has
    exponent_canada = Interview.create(position: "Software Developer", company: "Exponent Canada", date: "July 9, 2021", duration: 20, interviewer: "Salman Hasani", industry: "Technology", user: bob)
