@@ -1,6 +1,6 @@
 class InterviewsController < ApplicationController
   before_action :set_interview, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   before_action :correct_user, only: %i[ show edit update destroy ]
 
   # GET /interviews or /interviews.json
@@ -60,7 +60,7 @@ class InterviewsController < ApplicationController
 
   def correct_user
     @interview = current_user.interviews.find_by(id: params[:id])
-    redirect_to interviews_path, notice: "Not Authorized to Edit This Interview" if @interview.nil?
+    redirect_to interviews_path, notice: "Not Authorized to Access This Interview" if @interview.nil?
   end
 
   private

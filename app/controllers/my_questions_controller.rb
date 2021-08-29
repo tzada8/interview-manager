@@ -1,6 +1,6 @@
 class MyQuestionsController < ApplicationController
   before_action :set_my_question, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   before_action :correct_user, only: %i[ show edit update destroy ]
 
   # GET /my_questions or /my_questions.json
@@ -60,7 +60,7 @@ class MyQuestionsController < ApplicationController
 
   def correct_user
     @my_question = current_user.my_questions.find_by(id: params[:id])
-    redirect_to my_questions_path, notice: "Not Authorized to Edit This Interview" if @my_question.nil?
+    redirect_to my_questions_path, notice: "Not Authorized to Access This Question" if @my_question.nil?
   end
 
   private

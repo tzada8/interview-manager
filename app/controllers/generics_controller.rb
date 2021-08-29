@@ -1,6 +1,6 @@
 class GenericsController < ApplicationController
   before_action :set_generic, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   before_action :correct_user, only: %i[ show edit update destroy ]
 
   # GET /generics or /generics.json
@@ -60,7 +60,7 @@ class GenericsController < ApplicationController
 
   def correct_user
     @generic = current_user.generics.find_by(id: params[:id])
-    redirect_to generics_path, notice: "Not Authorized to Edit This Interview" if @generic.nil?
+    redirect_to generics_path, notice: "Not Authorized to Access This Question" if @generic.nil?
   end
 
   private
