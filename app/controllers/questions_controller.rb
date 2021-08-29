@@ -1,10 +1,11 @@
 class QuestionsController < ApplicationController
   before_action :get_interview
   before_action :set_question, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :correct_user, only: %i[ index show edit update destroy ]
 
   # GET /questions or /questions.json
   def index
-    # WILL PROBABLY REMOVE THIS PAGE ENTIRELY SINCE 'INDEX' PAGE WILL BE APART OF /interviews/:id
     @questions = @interview.questions
   end
 
@@ -56,6 +57,10 @@ class QuestionsController < ApplicationController
       format.html { redirect_to interview_questions_path(@interview), notice: "Question was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def correct_user
+      redirect_to interviews_path, notice: "Not Authorized to Access This Question" unless current_user.interviews.include? @interview
   end
 
   private
