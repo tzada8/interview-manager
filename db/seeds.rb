@@ -5,27 +5,32 @@
 case Rails.env
 when "development"
    # Users of app
-   user1 = User.new(email: 'test@test.com') # Has 0 interviews, 0 general questions, 0 own questions
+   # Has 0 interviews, 0 general questions, 0 own questions
+   user1 = User.new(first_name: 'Test', last_name: 'Test', email: 'test@test.com')
    user1.password = 'testing'
    user1.password_confirmation = 'testing'
    user1.save
 
-   bob = User.new(email: 'bob@bob.com') # Has 1 interview, 1 general questions, 0 own questions
+   # Has 1 interview, 1 general questions, 0 own questions
+   bob = User.new(first_name: 'Bob', last_name: 'Smith', email: 'bob@bob.com') 
    bob.password = 'bobbob'
    bob.password_confirmation = 'bobbob'
    bob.save
 
-   mary = User.new(email: 'mary@mary.com') # Has 2 interviews, 1 general question, 1 own questions
+   # Has 2 interviews, 1 general question, 1 own questions
+   mary = User.new(first_name: 'Mary', last_name: 'Jones', email: 'mary@mary.com') 
    mary.password = 'marymary'
    mary.password_confirmation = 'marymary'
    mary.save
 
-   fred = User.new(email: 'fred@fred.com') # Has many interviews, many general questions, 2 own questions
+   # Has many interviews, many general questions, 2 own questions
+   fred = User.new(first_name: 'Fred', last_name: 'Durst', email: 'fred@fred.com') 
    fred.password = 'fredfred'
    fred.password_confirmation = 'fredfred'
    fred.save
 
-   sue = User.new(email: 'sue@sue.com') # Has many interviews, many general questions, many own questions
+   # Has many interviews, many general questions, many own questions
+   sue = User.new(first_name: 'Sue', last_name: 'Perry', email: 'sue@sue.com') 
    sue.password = 'suesue'
    sue.password_confirmation = 'suesue'
    sue.save
