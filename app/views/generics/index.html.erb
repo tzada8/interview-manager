@@ -12,8 +12,7 @@
   </thead>
 
   <tbody>
-    <% @generics.each do |generic| %>
-      <% if generic.user == current_user %>
+    <%current_user.generics.each do |generic| %>
         <tr>
           <td><%= generic.prompt %></td>
           <td><%= generic.answer %></td>
@@ -21,7 +20,6 @@
           <td><%= link_to 'Edit', edit_generic_path(generic) %></td>
           <td><%= link_to 'Destroy', generic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>
