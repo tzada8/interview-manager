@@ -11,7 +11,7 @@
   </thead>
 
   <tbody>
-    <% current_user.my_questions.each do |my_question| %>
+    <% @my_questions.each do |my_question| %>
         <tr>
           <td><%= my_question.prompt %></td>
           <td><%= link_to 'Show', my_question %></td>

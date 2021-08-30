@@ -5,7 +5,7 @@ class MyQuestionsController < ApplicationController
 
   # GET /my_questions or /my_questions.json
   def index
-    @my_questions = MyQuestion.all
+    @my_questions = current_user.sort_my_questions
   end
 
   # GET /my_questions/1 or /my_questions/1.json

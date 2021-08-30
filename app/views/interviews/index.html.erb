@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% current_user.interviews.each do |interview| %>
+    <% @interviews.each do |interview| %>
         <tr>
           <td><%= interview.company %></td>
           <td><%= interview.position %></td>

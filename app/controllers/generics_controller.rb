@@ -5,7 +5,7 @@ class GenericsController < ApplicationController
 
   # GET /generics or /generics.json
   def index
-    @generics = Generic.all
+    @generics = current_user.sort_generics
   end
 
   # GET /generics/1 or /generics/1.json

@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <%current_user.generics.each do |generic| %>
+    <% @generics.each do |generic| %>
         <tr>
           <td><%= generic.prompt %></td>
           <td><%= generic.answer %></td>
