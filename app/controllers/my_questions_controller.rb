@@ -5,7 +5,13 @@ class MyQuestionsController < ApplicationController
 
   # GET /my_questions or /my_questions.json
   def index
-    @my_questions = current_user.sort_my_questions
+    search = params[:q]
+    if search.nil?
+      @my_questions = current_user.sort_my_questions
+    else
+      query = "%" + search + "%"
+      @my_questions = current_user.sort_my_questions.where("prompt LIKE ?", query)
+    end
   end
 
   # GET /my_questions/1 or /my_questions/1.json

@@ -5,7 +5,13 @@ class GenericsController < ApplicationController
 
   # GET /generics or /generics.json
   def index
-    @generics = current_user.sort_generics
+    search = params[:q]
+    if search.nil?
+      @generics = current_user.sort_generics
+    else
+      query = "%" + search + "%"
+      @generics = current_user.sort_generics.where("prompt LIKE ? OR answer LIKE ?", query, query)
+    end
   end
 
   # GET /generics/1 or /generics/1.json
