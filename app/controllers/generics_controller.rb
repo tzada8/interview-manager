@@ -9,8 +9,14 @@ class GenericsController < ApplicationController
     if search.nil?
       @generics = current_user.sort_generics
     else
-      query = "%" + search + "%"
-      @generics = current_user.sort_generics.where("prompt LIKE ? OR answer LIKE ?", query, query)
+      style = params[:exact]
+      if style.nil? # Don't search for exact match
+        query = "%" + search.upcase + "%"
+        @generics = current_user.sort_generics.where("UPPER(prompt) LIKE ? OR UPPER(answer) LIKE ?", query, query)
+      else # Search for exact match
+        query = "%" + search + "%"
+        @generics = current_user.sort_generics.where("prompt LIKE ? OR answer LIKE ?", query, query)
+      end
     end
   end
 

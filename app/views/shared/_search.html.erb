@@ -1,5 +1,10 @@
 <form class="d-flex" action=<% path %>>
         <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
+        </br>
+
+        <input id="exact" name="exact" class="form-control me-2" type="checkbox" label="Test" aria-label="Search">
+        <label for="exact">Exact</label>
+
         <button class="btn btn-outline-success" type="submit">Search</button>
 </form>
 <%= link_to 'Reset', path %>
