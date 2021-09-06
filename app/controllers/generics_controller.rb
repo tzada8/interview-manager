@@ -5,19 +5,7 @@ class GenericsController < ApplicationController
 
   # GET /generics or /generics.json
   def index
-    search = params[:q]
-    if search.nil?
-      @generics = current_user.get_generics
-    else
-      style = params[:exact]
-      if style.nil? # Don't search for exact match
-        query = "%" + search.upcase + "%"
-        @generics = current_user.get_generics.where("UPPER(prompt) LIKE ? OR UPPER(answer) LIKE ?", query, query)
-      else # Search for exact match
-        query = "%" + search + "%"
-        @generics = current_user.get_generics.where("prompt LIKE ? OR answer LIKE ?", query, query)
-      end
-    end
+    @generics = Question.search(params[:q], params[:exact], current_user.get_generics)
   end
 
   # GET /generics/1 or /generics/1.json
@@ -83,6 +71,6 @@ class GenericsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def generic_params
-      params.require(:generic).permit(:prompt, :answer)
+      params.require(:generic).permit(:question_id)
     end
 end

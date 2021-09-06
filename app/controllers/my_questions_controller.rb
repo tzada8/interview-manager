@@ -5,13 +5,7 @@ class MyQuestionsController < ApplicationController
 
   # GET /my_questions or /my_questions.json
   def index
-    search = params[:q]
-    if search.nil?
-      @my_questions = current_user.sort_my_questions
-    else
-      query = "%" + search + "%"
-      @my_questions = current_user.sort_my_questions.where("prompt LIKE ?", query)
-    end
+    @my_questions = Question.search(params[:q], params[:exact], current_user.get_my_questions)
   end
 
   # GET /my_questions/1 or /my_questions/1.json
@@ -20,7 +14,7 @@ class MyQuestionsController < ApplicationController
 
   # GET /my_questions/new
   def new
-    @my_question = current_user.my_questions.build
+    @my_question = current_user.get_my_questions.build
   end
 
   # GET /my_questions/1/edit
@@ -29,7 +23,7 @@ class MyQuestionsController < ApplicationController
 
   # POST /my_questions or /my_questions.json
   def create
-    @my_question = current_user.my_questions.build(my_question_params)
+    @my_question = current_user.get_my_questions.build(my_question_params)
 
     respond_to do |format|
       if @my_question.save

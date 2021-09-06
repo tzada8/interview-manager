@@ -2,6 +2,8 @@
 
 <h1><u><%= @interview.company %>, <%= @interview.position %></u> Questions</h1>
 
+<%= render 'shared/search', path: interview_specifics_path %>
+
 <table>
   <thead>
     <tr>
