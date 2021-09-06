@@ -10,33 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_29_033514) do
+ActiveRecord::Schema.define(version: 2021_09_03_024556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "generics", force: :cascade do |t|
-    t.string "prompt", limit: 4096, null: false
-    t.string "answer", limit: 4096, null: false
+    t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_generics_on_user_id"
-  end
-
-  create_table "generics_interviews", id: false, force: :cascade do |t|
-    t.bigint "generic_id", null: false
-    t.bigint "interview_id", null: false
-    t.index ["generic_id", "interview_id"], name: "index_generics_interviews_on_generic_id_and_interview_id", unique: true
+    t.index ["question_id"], name: "index_generics_on_question_id"
   end
 
   create_table "interviews", force: :cascade do |t|
-    t.string "position", limit: 100, null: false
     t.string "company", limit: 100, null: false
+    t.string "position", limit: 100, null: false
+    t.string "industry", limit: 100, null: false
     t.date "date", null: false
     t.integer "duration", null: false
     t.string "interviewer", limit: 100, null: false
-    t.string "industry", limit: 100, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
@@ -44,20 +36,28 @@ ActiveRecord::Schema.define(version: 2021_08_29_033514) do
   end
 
   create_table "my_questions", force: :cascade do |t|
-    t.string "prompt", limit: 4096, null: false
+    t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_my_questions_on_user_id"
+    t.index ["question_id"], name: "index_my_questions_on_question_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string "prompt", limit: 4096, null: false
-    t.string "answer", limit: 4096, null: false
-    t.bigint "interview_id", null: false
+    t.string "answer", limit: 4096
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["interview_id"], name: "index_questions_on_interview_id"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "specifics", force: :cascade do |t|
+    t.bigint "interview_id", null: false
+    t.bigint "question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["interview_id"], name: "index_specifics_on_interview_id"
+    t.index ["question_id"], name: "index_specifics_on_question_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,10 +74,10 @@ ActiveRecord::Schema.define(version: 2021_08_29_033514) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "generics", "users"
-  add_foreign_key "generics_interviews", "generics"
-  add_foreign_key "generics_interviews", "interviews"
+  add_foreign_key "generics", "questions"
   add_foreign_key "interviews", "users"
-  add_foreign_key "my_questions", "users"
-  add_foreign_key "questions", "interviews"
+  add_foreign_key "my_questions", "questions"
+  add_foreign_key "questions", "users"
+  add_foreign_key "specifics", "interviews"
+  add_foreign_key "specifics", "questions"
 end

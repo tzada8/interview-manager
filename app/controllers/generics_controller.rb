@@ -7,15 +7,15 @@ class GenericsController < ApplicationController
   def index
     search = params[:q]
     if search.nil?
-      @generics = current_user.sort_generics
+      @generics = current_user.get_generics
     else
       style = params[:exact]
       if style.nil? # Don't search for exact match
         query = "%" + search.upcase + "%"
-        @generics = current_user.sort_generics.where("UPPER(prompt) LIKE ? OR UPPER(answer) LIKE ?", query, query)
+        @generics = current_user.get_generics.where("UPPER(prompt) LIKE ? OR UPPER(answer) LIKE ?", query, query)
       else # Search for exact match
         query = "%" + search + "%"
-        @generics = current_user.sort_generics.where("prompt LIKE ? OR answer LIKE ?", query, query)
+        @generics = current_user.get_generics.where("prompt LIKE ? OR answer LIKE ?", query, query)
       end
     end
   end
@@ -26,7 +26,7 @@ class GenericsController < ApplicationController
 
   # GET /generics/new
   def new
-    @generic = current_user.generics.build
+    @generic = current_user.get_generics.build
   end
 
   # GET /generics/1/edit
@@ -35,7 +35,7 @@ class GenericsController < ApplicationController
 
   # POST /generics or /generics.json
   def create
-    @generic = current_user.generics.build(generic_params)
+    @generic = current_user.get_generics.build(generic_params)
 
     respond_to do |format|
       if @generic.save
@@ -71,14 +71,14 @@ class GenericsController < ApplicationController
   end
 
   def correct_user
-    @generic = current_user.generics.find_by(id: params[:id])
+    @generic = current_user.get_generics.find_by(id: params[:id])
     redirect_to generics_path, notice: "Not Authorized to Access This Question" if @generic.nil?
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_generic
-      @generic = Generic.find(params[:id])
+      @generic = Question.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,0 +1,5 @@
+<h1>New Question</h1>
+
+<%= render 'questions/form', question: @question, path: create_specific_path %>
+
+<%= link_to 'Back', interview_specifics_path(@interview) %>

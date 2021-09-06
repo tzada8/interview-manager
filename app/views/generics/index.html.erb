@@ -18,9 +18,9 @@
         <tr>
           <td><%= generic.prompt %></td>
           <td><%= generic.answer %></td>
-          <td><%= link_to 'Show', generic %></td>
+          <td><%= link_to 'Show', generic_path(generic) %></td>
           <td><%= link_to 'Edit', edit_generic_path(generic) %></td>
-          <td><%= link_to 'Destroy', generic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', generic_path(generic), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
   </tbody>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1><u><%= @interview.company %>, <%= @interview.position %></u> Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prompt</th>
+      <th>Answer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @specifics.each do |specific| %>
+      <tr>
+        <% q = specific.question %>
+        <td><%= q.prompt %></td>
+        <td><%= q.answer %></td>
+        <td><%= link_to 'Show', [@interview, specific] %></td>
+        <td><%= link_to 'Edit Question', edit_interview_specific_path(@interview, specific) %></td>
+        <td><%= link_to 'Destroy Question', delete_specific_path(@interview, specific), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question', new_interview_specific_path(@interview) %> |
+<%= link_to 'Back to Interview', @interview %>

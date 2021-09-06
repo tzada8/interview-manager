@@ -5,7 +5,7 @@ class InterviewsController < ApplicationController
 
   # GET /interviews or /interviews.json
   def index
-    @interviews = current_user.sort_interviews
+    @interviews = current_user.get_interviews
   end
 
   # GET /interviews/1 or /interviews/1.json
@@ -71,6 +71,6 @@ class InterviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def interview_params
-      params.require(:interview).permit(:position, :company, :date, :duration, :interviewer, :industry, :user_id)
+      params.require(:interview).permit(:company, :position, :industry, :date, :duration, :interviewer, :user_id)
     end
 end

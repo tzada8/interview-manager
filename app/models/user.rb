@@ -1,26 +1,40 @@
 class User < ApplicationRecord
   has_many :interviews
-  has_many :generics
-  has_many :my_questions
+  has_many :questions
+
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates_length_of :first_name, maximum: 50
+  validates_length_of :last_name, maximum: 50
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  
-  # BY DEFAULT: order user's interviews alphabetically by company, then position, then industry, then date
-  def sort_interviews
+  # Get all user's Interviews (sorted company, position, industry, date)
+  def get_interviews
     return interviews.order(:company, :position, :industry, :date)
   end
 
-  # BY DEFAULT: order user's own questions alphabetically by prompt
-  def sort_my_questions
-    return my_questions.order(:prompt)
+  # Get all user's Generic questions
+  def get_generics
+    return get_type_questions("generics")
   end
 
-  # BY DEFAULT: order user's generic questions by prompt, then answer
-  def sort_generics
-    return generics.order(:prompt, :answer)
+  # Get all user's Specific questions
+  def get_specifics
+    return get_type_questions("specifics")
   end
+
+  # Get all user's Own questions
+  def get_my_questions
+    return get_type_questions("my_questions")
+  end
+
+  private
+    # General private method to get ordered category of questions (sorted prompt, answer)
+    def get_type_questions(other_relation)
+      return questions.from("questions, " + other_relation).where(other_relation + ".question_id = questions.id").order(:prompt, :answer)
+    end
 end

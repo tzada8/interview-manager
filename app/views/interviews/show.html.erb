@@ -32,16 +32,17 @@
 
 <p>
   <strong>Questions:</strong>
-  <% @interview.questions.each do |question| %>
+  <% @interview.get_specifics.each do |s| %>
     <ul>
       <li>
-        <%= question.prompt %>
-        <%= question.answer %>
+        <% q = s.question %>
+        <%= q.prompt %>
+        <%= q.answer %>
       </li>
     </ul>
   <% end %>
 </p>
 
 <%= link_to 'Edit', edit_interview_path(@interview) %> |
-<%= link_to 'Add Question', interview_questions_path(@interview) %> |
+<%= link_to 'Add Question', interview_specifics_path(@interview) %> |
 <%= link_to 'Back', interviews_path %>

@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1><u><%= @interview.company %>, <%= @interview.position %></u> Questions</h1>
-
 <table>
   <thead>
     <tr>
@@ -12,19 +10,19 @@
   </thead>
 
   <tbody>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.prompt %></td>
-        <td><%= question.answer %></td>
-        <td><%= link_to 'Show', [@interview, question] %></td>
-        <td><%= link_to 'Edit Question', edit_interview_question_path(@interview, question) %></td>
-        <td><%= link_to 'Destroy Question', [@interview, question], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% @questions.each do |q| %>
+        <tr>
+          <td><%= q.prompt %></td>
+          <td><%= q.answer %></td>
+          <td><%= link_to 'Show', question_path(q) %></td>
+          <td><%= link_to 'Edit', edit_question_path(q) %></td>
+          <td><%= link_to 'Destroy', question_path(q), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Question', new_interview_question_path(@interview) %> |
-<%= link_to 'Back to Interview', @interview %>
+<%= link_to 'New Question', new_question_path %> |
+<%= link_to 'Home', root_path %>
