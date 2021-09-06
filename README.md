@@ -23,6 +23,14 @@ Things you may want to cover:
 
 -  ...
 
+Used for learning Rails and working with 'devise' gem
+
+-  https://www.youtube.com/watch?v=fmyvWz5TUWg
+
+Used for having React work as frontend with Ruby as backend
+
+-  https://www.youtube.com/watch?v=oyjzi837wME&t=1818s
+
 Used for creating nested resources "Questions" to "Interviews"
 
 -  https://www.digitalocean.com/community/tutorials/how-to-create-nested-resources-for-a-ruby-on-rails-application
