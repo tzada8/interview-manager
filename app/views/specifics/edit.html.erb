@@ -1,6 +1,6 @@
 <h1>Editing Question</h1>
 
-<%= render 'questions/form', question: @question, path: update_specific_path %>
+<%= render 'shared/form', question: @question, path: update_specific_path %>
 
 <%= link_to 'Show', [@interview, @specific] %> |
 <%= link_to 'Back', interview_specifics_path(@interview) %>
