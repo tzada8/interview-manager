@@ -59,9 +59,15 @@ class SpecificsController < ApplicationController
 
   # DELETE /specifics/1 or /specifics/1.json
   def delete_specific
-    @specific.question.destroy
+    @question = @specific.question    
+    if @question.is_only_specific? # If question is only specific, then delete entire question
+      @specific.destroy
+      @question.destroy
+    else # Else question is also generic, so just remove reference
+      @specific.delete
+    end
     respond_to do |format|
-      format.html { redirect_to specifics_url, notice: "Question was successfully destroyed." }
+      format.html { redirect_to interview_specifics_url, notice: "Question was successfully destroyed." }
       format.json { head :no_content }
     end
   end
