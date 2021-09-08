@@ -8,6 +8,7 @@ class Question < ApplicationRecord
   validates_length_of :prompt, maximum: 4096
   validates_length_of :answer, maximum: 4096
 
+  # Goes through all prompts and answers trying to find match based off "query" and if "exact" is selected
   def self.search(query, exact, user_questions)
     if query.nil?  # Nothing to search by, so return everything of users
       return user_questions
