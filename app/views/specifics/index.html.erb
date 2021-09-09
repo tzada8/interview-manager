@@ -21,7 +21,7 @@
         <td><%= q.answer %></td>
         <td><%= link_to 'Show', [@interview, specific] %></td>
         <td><%= link_to 'Edit Question', edit_interview_specific_path(@interview, specific) %></td>
-        <td><%= link_to 'Destroy Question', delete_specific_path(@interview, specific), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy Question', interview_specific_path(@interview, specific), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

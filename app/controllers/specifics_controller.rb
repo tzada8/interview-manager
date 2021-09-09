@@ -1,8 +1,8 @@
 class SpecificsController < ApplicationController
   before_action :get_interview
-  before_action :set_specific, only: %i[ show edit update_specific delete_specific ]
+  before_action :set_specific, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  before_action :correct_user, only: %i[ index show edit update_specific destroy_specific ]
+  before_action :correct_user, only: %i[ index show edit update destroy ]
 
   # GET /specifics or /specifics.json
   def index
@@ -25,7 +25,7 @@ class SpecificsController < ApplicationController
   end
 
   # POST /specifics or /specifics.json
-  def create_specific
+  def create
     @question = current_user.questions.build(specific_question_params)
 
     respond_to do |format|
@@ -43,7 +43,7 @@ class SpecificsController < ApplicationController
   end
 
   # PATCH /specifics/1 or /specifics/1.json
-  def update_specific
+  def update
     @question = @specific.question
     
     respond_to do |format|
@@ -58,7 +58,7 @@ class SpecificsController < ApplicationController
   end
 
   # DELETE /specifics/1 or /specifics/1.json
-  def delete_specific
+  def destroy
     @question = @specific.question    
     if @question.is_only_specific? # If question is only specific, then delete entire question
       @specific.destroy
