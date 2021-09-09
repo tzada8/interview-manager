@@ -5,7 +5,7 @@ class MyQuestionsController < ApplicationController
 
   # GET /my_questions or /my_questions.json
   def index
-    @my_questions = Question.search(params[:q], params[:exact], current_user.get_my_questions)
+    @my_questions = Question.search(params[:q], current_user.get_my_questions)
   end
 
   # GET /my_questions/1 or /my_questions/1.json

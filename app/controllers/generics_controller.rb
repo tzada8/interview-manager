@@ -5,7 +5,7 @@ class GenericsController < ApplicationController
 
   # GET /generics or /generics.json
   def index
-    @generics = Question.search(params[:q], params[:exact], current_user.get_generics)
+    @generics = Question.search(params[:q], current_user.get_generics)
   end
 
   # GET /generics/1 or /generics/1.json

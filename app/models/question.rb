@@ -9,17 +9,12 @@ class Question < ApplicationRecord
   validates_length_of :answer, maximum: 4096
 
   # Goes through all prompts and answers trying to find match based off "query" and if "exact" is selected
-  def self.search(query, exact, user_questions)
+  def self.search(query, user_questions)
     if query.nil?  # Nothing to search by, so return everything of users
       return user_questions
     else # Else specific search criteria given, so use it to filter
-      if exact.nil? # Don't search for exact match
         query = "%" + query.upcase + "%"
         return user_questions.where("UPPER(prompt) LIKE ? OR UPPER(answer) LIKE ?", query, query)
-      else # Search for exact match
-        query = "%" + query + "%"
-        return user_questions.where("prompt LIKE ? OR answer LIKE ?", query, query)
-      end
     end
   end
 
