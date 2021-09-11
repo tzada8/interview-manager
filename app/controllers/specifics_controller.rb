@@ -6,7 +6,7 @@ class SpecificsController < ApplicationController
 
   # GET /specifics or /specifics.json
   def index
-    @specifics = Question.search(params[:q], @interview.get_specifics)
+    @specifics = Question.search(params[:q], @interview.specifics)
   end
 
   # GET /specifics/1 or /specifics/1.json
