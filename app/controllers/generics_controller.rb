@@ -5,43 +5,49 @@ class GenericsController < ApplicationController
 
   # GET /generics or /generics.json
   def index
-    @generics = Question.search(params[:q], current_user.get_generics)
+    @questions = Question.search(params[:q], current_user.get_generics)
   end
 
   # GET /generics/1 or /generics/1.json
   def show
+    @question = @generic.question
   end
 
   # GET /generics/new
   def new
-    @generic = current_user.get_generics.build
+    @question = current_user.get_generics.build
   end
 
   # GET /generics/1/edit
   def edit
+    @question = @generic.question
   end
 
   # POST /generics or /generics.json
   def create
-    @generic = current_user.get_generics.build(generic_params)
+    @question = current_user.get_generics.build(question_params)
 
     respond_to do |format|
-      if @generic.save
-        format.html { redirect_to @generic, notice: "Generic was successfully created." }
-        format.json { render :show, status: :created, location: @generic }
+      if @question.save
+        @generic = Generic.new(question: @question)
+        @generic.save
+        format.html { redirect_to generic_path(@generic), notice: "Generic was successfully created." }
+        format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @generic.errors, status: :unprocessable_entity }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /generics/1 or /generics/1.json
   def update
+    @question = @generic.question
+    
     respond_to do |format|
-      if @generic.update(generic_params)
+      if @question.update(question_params)
         format.html { redirect_to @generic, notice: "Generic was successfully updated." }
-        format.json { render :show, status: :ok, location: @generic }
+        format.json { render :show, status: :created, location: @generic }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @generic.errors, status: :unprocessable_entity }
@@ -51,26 +57,36 @@ class GenericsController < ApplicationController
 
   # DELETE /generics/1 or /generics/1.json
   def destroy
-    @generic.destroy
+    @question = @generic.question    
+    if @question.is_only_specific? # If question is only generic, then delete entire question
+      @generic.destroy
+      @question.destroy
+    else # Else question is also specific, so just remove reference
+      @generic.delete
+    end
     respond_to do |format|
-      format.html { redirect_to generics_url, notice: "Generic was successfully destroyed." }
+      format.html { redirect_to generics_url, notice: "Question was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   def correct_user
-    @generic = current_user.get_generics.find_by(id: params[:id])
-    redirect_to generics_path, notice: "Not Authorized to Access This Question" if @generic.nil?
+    redirect_to generics_path, notice: "Not Authorized to Access This Generic" unless current_user.get_generics.include? @generic.question
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_generic
-      @generic = Question.find(params[:id])
+      @generic = Generic.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def generic_params
       params.require(:generic).permit(:question_id)
+    end
+
+    # Params allowed for a question
+    def question_params
+      params.require(:question).permit(:prompt, :answer)
     end
 end

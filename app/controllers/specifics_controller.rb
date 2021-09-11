@@ -26,7 +26,7 @@ class SpecificsController < ApplicationController
 
   # POST /specifics or /specifics.json
   def create
-    @question = current_user.questions.build(specific_question_params)
+    @question = current_user.questions.build(question_params)
 
     respond_to do |format|
       if @question.save
@@ -47,7 +47,7 @@ class SpecificsController < ApplicationController
     @question = @specific.question
     
     respond_to do |format|
-      if @question.update(specific_question_params)
+      if @question.update(question_params)
         format.html { redirect_to interview_specifics_path(@interview), notice: "Specific was successfully updated." }
         format.json { render :show, status: :created, location: @specific }
       else
@@ -73,7 +73,7 @@ class SpecificsController < ApplicationController
   end
 
   def correct_user
-      redirect_to interviews_path, notice: "Not Authorized to Access This specific" unless current_user.interviews.include? @interview
+      redirect_to interviews_path, notice: "Not Authorized to Access This Specific" unless current_user.interviews.include? @interview
   end
 
   private
@@ -93,7 +93,7 @@ class SpecificsController < ApplicationController
     end
 
     # Params allowed for a question
-    def specific_question_params
+    def question_params
       params.require(:question).permit(:prompt, :answer)
     end
 end

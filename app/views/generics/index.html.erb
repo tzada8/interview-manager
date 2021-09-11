@@ -14,14 +14,17 @@
   </thead>
 
   <tbody>
-    <% @generics.each do |generic| %>
+    <% @questions.each do |question| %>
+      <% question.generics.each do |generic| %>
         <tr>
-          <td><%= generic.prompt %></td>
-          <td><%= generic.answer %></td>
+          <% q = generic.question %>
+          <td><%= q.prompt %></td>
+          <td><%= q.answer %></td>
           <td><%= link_to 'Show', generic_path(generic) %></td>
           <td><%= link_to 'Edit', edit_generic_path(generic) %></td>
           <td><%= link_to 'Destroy', generic_path(generic), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
