@@ -56,15 +56,16 @@ class GenericsController < ApplicationController
 
   # DELETE /generics/1 or /generics/1.json
   def destroy
-    @question = @generic.question    
-    if @question.is_only_specific? # If question is only generic, then delete entire question
+    @question = @generic.question
+    # This generic points to a question, and so do many specifics
+    @question.specifics.each do |specific|
+      # Go through all specifics deleting them first, then delete the generic and question
+      specific.destroy
+    end
       @generic.destroy
       @question.destroy
-    else # Else question is also specific, so just remove reference
-      @generic.delete
-    end
     respond_to do |format|
-      format.html { redirect_to generics_url, notice: "Question was successfully destroyed." }
+      format.html { redirect_to generics_url, notice: "Generic was successfully destroyed." }
       format.json { head :no_content }
     end
   end
