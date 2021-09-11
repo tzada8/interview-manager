@@ -29,8 +29,7 @@ class MyQuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        @my_question = MyQuestion.new(question: @question)
-        @my_question.save
+        @my_question = MyQuestion.create(question: @question)
         format.html { redirect_to my_question_path(@my_question), notice: "Own Question was successfully created." }
         format.json { render :show, status: :created, location: @question }
       else

@@ -29,8 +29,7 @@ class GenericsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        @generic = Generic.new(question: @question)
-        @generic.save
+        @generic = Generic.create(question: @question)
         format.html { redirect_to generic_path(@generic), notice: "Generic was successfully created." }
         format.json { render :show, status: :created, location: @question }
       else

@@ -18,9 +18,9 @@
         <tr>
           <% q = my_question.question %>
           <td><%= q.prompt %></td>
-          <td><%= link_to 'Show', my_question_path(my_question) %></td>
+          <td><%= link_to 'Show', my_question %></td>
           <td><%= link_to 'Edit', edit_my_question_path(my_question) %></td>
-          <td><%= link_to 'Destroy', my_question_path(my_question), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', my_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     <% end %>
