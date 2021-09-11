@@ -5,43 +5,49 @@ class MyQuestionsController < ApplicationController
 
   # GET /my_questions or /my_questions.json
   def index
-    @my_questions = Question.search(params[:q], current_user.get_my_questions)
+    @questions = Question.search(params[:q], current_user.get_my_questions)
   end
 
   # GET /my_questions/1 or /my_questions/1.json
   def show
+    @question = @my_question.question
   end
 
   # GET /my_questions/new
   def new
-    @my_question = current_user.get_my_questions.build
+    @question = current_user.get_my_questions.build
   end
 
   # GET /my_questions/1/edit
   def edit
+    @question = @my_question.question
   end
 
   # POST /my_questions or /my_questions.json
   def create
-    @my_question = current_user.get_my_questions.build(my_question_params)
+    @question = current_user.get_my_questions.build(question_params)
 
     respond_to do |format|
-      if @my_question.save
-        format.html { redirect_to @my_question, notice: "My question was successfully created." }
-        format.json { render :show, status: :created, location: @my_question }
+      if @question.save
+        @my_question = MyQuestion.new(question: @question)
+        @my_question.save
+        format.html { redirect_to my_question_path(@my_question), notice: "Own Question was successfully created." }
+        format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @my_question.errors, status: :unprocessable_entity }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /my_questions/1 or /my_questions/1.json
   def update
+    @question = @my_question.question
+    
     respond_to do |format|
-      if @my_question.update(my_question_params)
-        format.html { redirect_to @my_question, notice: "My question was successfully updated." }
-        format.json { render :show, status: :ok, location: @my_question }
+      if @question.update(question_params)
+        format.html { redirect_to @my_question, notice: "Own Question was successfully updated." }
+        format.json { render :show, status: :created, location: @my_question }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @my_question.errors, status: :unprocessable_entity }
@@ -50,17 +56,17 @@ class MyQuestionsController < ApplicationController
   end
 
   # DELETE /my_questions/1 or /my_questions/1.json
-  def destroy
+  def destroy    
     @my_question.destroy
+    @my_question.question.destroy
     respond_to do |format|
-      format.html { redirect_to my_questions_url, notice: "My question was successfully destroyed." }
+      format.html { redirect_to my_questions_url, notice: "Own Question was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   def correct_user
-    @my_question = current_user.my_questions.find_by(id: params[:id])
-    redirect_to my_questions_path, notice: "Not Authorized to Access This Question" if @my_question.nil?
+    redirect_to my_questions_path, notice: "Not Authorized to Access This Own Question" unless current_user.get_my_questions.include? @my_question.question
   end
 
   private
@@ -71,6 +77,11 @@ class MyQuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def my_question_params
-      params.require(:my_question).permit(:prompt)
+      params.require(:my_question).permit(:question_id)
+    end
+
+    # Params allowed for a question
+    def question_params
+      params.require(:question).permit(:prompt, :answer)
     end
 end

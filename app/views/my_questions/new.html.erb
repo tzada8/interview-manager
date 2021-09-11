@@ -1,5 +1,5 @@
 <h1>New My Question</h1>
 
-<%= render 'form', my_question: @my_question %>
+<%= render 'shared/form', question: @question, path: my_questions_path, is_answer_visible: false %>
 
 <%= link_to 'Back', my_questions_path %>
