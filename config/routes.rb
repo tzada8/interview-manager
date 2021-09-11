@@ -7,6 +7,4 @@ Rails.application.routes.draw do
     resources :specifics
   end
   resources :my_questions
-
-  resources :questions
 end
