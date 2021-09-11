@@ -1,6 +1,1 @@
-<h1>Editing Question</h1>
-
-<%= render 'shared/form', question: @question, path: [@interview, @specific], is_answer_visible: true %>
-
-<%= link_to 'Show', [@interview, @specific] %> |
-<%= link_to 'Back', interview_specifics_path(@interview) %>
+<%= render 'shared/edit', question: @question, show_path: [@interview, @specific], index_path: interview_specifics_path(@interview), is_answer_visible: true, type: "Specific" %>

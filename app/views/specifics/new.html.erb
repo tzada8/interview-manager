@@ -1,5 +1,1 @@
-<h1>New Question</h1>
-
-<%= render 'shared/form', question: @question, path: interview_specifics_path(@interview), is_answer_visible: true %>
-
-<%= link_to 'Back', interview_specifics_path(@interview) %>
+<%= render 'shared/new', question: @question, index_path: interview_specifics_path(@interview), is_answer_visible: true, type: "Specific" %>

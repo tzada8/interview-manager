@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prompt:</strong>
+  <%= question.prompt %>
+</p>
+
+<% if is_answer_visible %>
+  <p>
+    <strong>Answer:</strong>
+    <%= question.answer %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit', edit_path %> |
+<%= link_to 'Back', index_path %>

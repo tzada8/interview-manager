@@ -1,9 +1,1 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Prompt:</strong>
-  <%= @question.prompt %>
-</p>
-
-<%= link_to 'Edit', edit_my_question_path(@my_question) %> |
-<%= link_to 'Back', my_questions_path %>
+<%= render 'shared/show', question: @question, edit_path: edit_my_question_path(@my_question), index_path: my_questions_path, is_answer_visible: false %>

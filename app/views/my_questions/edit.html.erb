@@ -1,6 +1,1 @@
-<h1>Editing My Question</h1>
-
-<%= render 'shared/form', question: @question, path: my_question_path(@my_question), is_answer_visible: false %>
-
-<%= link_to 'Show', @my_question %> |
-<%= link_to 'Back', my_questions_path %>
+<%= render 'shared/edit', question: @question, show_path: @my_question, index_path: my_questions_path, is_answer_visible: false, type: "My Question" %>

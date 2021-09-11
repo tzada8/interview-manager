@@ -1,14 +1,1 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Prompt:</strong>
-  <%= @question.prompt %>
-</p>
-
-<p>
-  <strong>Answer:</strong>
-  <%= @question.answer %>
-</p>
-
-<%= link_to 'Edit', edit_generic_path(@generic) %> |
-<%= link_to 'Back', generics_path %>
+<%= render 'shared/show', question: @question, edit_path: edit_generic_path(@generic), index_path: generics_path, is_answer_visible: true %>

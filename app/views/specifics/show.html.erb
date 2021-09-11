@@ -1,13 +1,1 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>Prompt:</strong>
-  <%= @question.prompt %>
-</p>
-
-<p>
-  <strong>Answer:</strong>
-  <%= @question.answer %>
-</p>
-
-<%= link_to 'Edit', edit_interview_specific_path(@interview, @specific) %> |
-<%= link_to 'Back', interview_specifics_path(@interview) %>
+<%= render 'shared/show', question: @question, edit_path: edit_interview_specific_path(@interview, @specific), index_path: interview_specifics_path(@interview), is_answer_visible: true %>
