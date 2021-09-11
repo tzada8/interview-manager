@@ -16,10 +16,12 @@
     <%= form.text_area :prompt %>
   </div>
 
-  <div class="field">
-    <%= form.label :answer %>
-    <%= form.text_area :answer %>
-  </div>
+  <% if is_answer_visible %>
+    <div class="field">
+      <%= form.label :answer %>
+      <%= form.text_area :answer %>
+    </div>
+  <% end %>
 
   <% unless @interview.nil? %>
     <div class="field">
