@@ -12,6 +12,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # Gets all users interviews as a nested array to easily use in a dropdown menu
+  def interviews_to_nested_array
+    nested = []  
+    interviews.order(:company, :position, :industry, :date).each do |interview|
+      nested.push ["#{interview.company}, #{interview.position}", interview.id]
+    end
+    return nested 
+  end
+  
   # Get all user's Interviews (sorted company, position, industry, date)
   def get_interviews
     return interviews.order(:company, :position, :industry, :date)

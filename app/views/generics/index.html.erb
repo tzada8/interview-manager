@@ -9,7 +9,7 @@
     <tr>
       <th>Prompt</th>
       <th>Answer</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -22,6 +22,7 @@
           <td><%= q.answer %></td>
           <td><%= link_to 'Show', generic %></td>
           <td><%= link_to 'Edit', edit_generic_path(generic) %></td>
+          <td><%= link_to 'Add to Interview', add_to_interview_path(generic) %></td>
           <td><%= link_to 'Destroy', generic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>

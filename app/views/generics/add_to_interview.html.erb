@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_with(model: @question, url: create_interview_specific_path, local: true) do |form| %>
+    <% if @question.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@question.errors.count, "error") %> prohibited this interview from being saved:</h2>
+
+            <ul>
+                <% @question.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+        <%= form.label "Select Interview:" %>
+        <%= form.select(:interview_id, current_user.interviews_to_nested_array) %>
+    </div>
+
+    <div class="actions">
+        <%= form.submit "Submit" %>
+    </div>
+<% end %>
+  
+<%= link_to 'Show', @generic %> |
+<%= link_to 'Back', generics_path %>
