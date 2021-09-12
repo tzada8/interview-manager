@@ -19,8 +19,8 @@ class Interview < ApplicationRecord
    validates_numericality_of :duration, only_integer: true, greater_than: 0, less_than_or_equal_to: 480
    validates :industry, inclusion: INDUSTRIES
 
-   # Get all user's Specific questions (sorted prompt, answer)
+   # Get all user's specifics as Questions (sorted prompt, answer)
   def get_specifics
-    return specifics.from("specifics, questions").where("specifics.question_id = questions.id").order(:prompt, :answer)
+    return Question.from("questions, specifics").where("questions.id = specifics.question_id AND specifics.interview_id = ?", id).order(:prompt, :answer)
   end
 end

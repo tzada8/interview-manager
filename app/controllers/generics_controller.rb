@@ -76,7 +76,9 @@ class GenericsController < ApplicationController
 
     respond_to do |format|
       if @interview.get_specifics.include?(@question)
-        format.html { render :add_to_interview, notice: "This Generic Question already exists in Interview's Questions.", status: :unprocessable_entity }
+        # THIS NOTICE WILL NEED TO BE CONVERTED AS AN ERROR MESSAGE
+        flash[:notice] = "This Generic Question already exists in Interview's Questions."
+        format.html { render :add_to_interview, status: :unprocessable_entity }
         format.json { render json: @generic.errors, status: :unprocessable_entity }
       else
         Specific.create(interview: @interview, question: @question)
